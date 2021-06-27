@@ -100,6 +100,14 @@ variable "spoke_vm_ip_address" {
   type = string
 }
 
+variable "spoke_vm_size" {
+  type = string
+}
+
 variable "spoke_vm_admin_username" {
+  type = string
+}
+
+variable "spoke_vm_admin_password" {
   type = string
 }

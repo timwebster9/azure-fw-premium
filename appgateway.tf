@@ -2,7 +2,8 @@ resource "azurerm_public_ip" "appgw_pip" {
   name                = var.appgw_pip_name
   resource_group_name = azurerm_resource_group.poc-vnet.name
   location            = azurerm_resource_group.poc-vnet.location
-  allocation_method   = "Dynamic"
+  sku                 = "Standard"
+  allocation_method   = "Static"
 }
 
 resource "azurerm_application_gateway" "appgw" {
@@ -13,12 +14,11 @@ resource "azurerm_application_gateway" "appgw" {
   sku {
     name     = "Standard_v2"
     tier     = "Standard_v2"
-    #capacity = 2
   }
 
   autoscale_configuration {
     min_capacity = 0
-    max_capacity = 1
+    max_capacity = 2
   }
 
   gateway_ip_configuration {

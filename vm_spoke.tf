@@ -1,10 +1,3 @@
-resource "azurerm_public_ip" "vm-pip" {
-    name                         = "vm-pip"
-    location                     = azurerm_resource_group.poc-vnet.location
-    resource_group_name          = azurerm_resource_group.poc-vnet.name
-    allocation_method            = "Static"
-}
-
 resource "azurerm_network_interface" "example" {
   name                = "example-nic"
   location            = azurerm_resource_group.poc-vnet.location
@@ -15,7 +8,6 @@ resource "azurerm_network_interface" "example" {
     subnet_id                     = azurerm_subnet.spoke.id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.spoke_vm_ip_address
-    public_ip_address_id          = azurerm_public_ip.vm-pip.id
   }
 }
 
@@ -23,12 +15,14 @@ resource "azurerm_linux_virtual_machine" "example" {
   name                = "spoke-vm"
   resource_group_name = azurerm_resource_group.poc-vnet.name
   location            = azurerm_resource_group.poc-vnet.location
-  size                = "Standard_B2ms"
+  size                = var.spoke_vm_size
   disable_password_authentication = false
-  admin_username      = "adminuser"
-  admin_password      = "Passw0rd1234"
+  admin_username      = var.spoke_vm_admin_username
+  admin_password      = var.spoke_vm_admin_password
 
+  # deploy after firewall rules are in place so cloud-init works
   depends_on = [
+    azurerm_firewall.fw-poc,
     azurerm_firewall_policy_rule_collection_group.example
   ]
 

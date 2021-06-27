@@ -1,4 +1,4 @@
-hub_resource_group = "rg-fwprem-5"
+hub_resource_group = "rg-fwprem-6"
 location = "uksouth"
 
 # hub
@@ -25,5 +25,7 @@ appgw_http_probe_name = "http-probe"
 # spoke
 cidr_spoke_vnet = ["10.124.14.0/23"]
 cidr_spoke_subnet_default = ["10.124.14.0/28"]
+spoke_vm_size = "Standard_B1ms"
 spoke_vm_ip_address = "10.124.14.4"
 spoke_vm_admin_username = "adminuser"
+spoke_vm_admin_password = "Passw0rd1234"

@@ -2,7 +2,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "example" {
   name               = "poc-rule-collection"
   firewall_policy_id = module.firewall_policy.policy_id
   priority           = 500
-  
+
   application_rule_collection {
     name     = "infra-rules"
     priority = 500
@@ -32,7 +32,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "example" {
         type = "Https"
         port = 443
       }
-      source_addresses  = var.cidr_hub_subnet_gw
+      source_addresses  = var.cidr_hub_subnet_appgw
       destination_fqdns = ["127.0.0.1"]
     }
 
