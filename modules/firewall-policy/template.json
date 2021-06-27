@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "variables": {},
+  "parameters": {
+      "name": {
+          "type": "string",
+          "metadata": {
+              "description": "Name of the policy"
+          }
+      },
+      "identityId": {
+          "type": "string",
+          "metadata": {
+              "description": "UAMI ID"
+          }
+      },
+      "keyVaultName": {
+          "type": "string",
+          "metadata": {
+              "description": "Name of Key Vault containing firewall certificate"
+          }
+      },
+      "certSecretId": {
+          "type": "string",
+          "metadata": {
+              "description": "firewall certificate secret ID"
+          }
+      }
+  },
+  "resources": [
+      {
+        "type": "Microsoft.Network/firewallPolicies",
+        "apiVersion": "2020-07-01",
+        "name": "[parameters('name')]",
+        "location": "[resourceGroup().location]",
+        "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentities": {
+                "[parameters('identityId')]": {}
+            }
+        },
+        "properties": {
+            "sku": {
+                "tier": "Premium"
+            },
+             "transportSecurity": {
+                "certificateAuthority": {
+                  "name": "[parameters('keyVaultName')]",
+                 "keyVaultSecretId": "[parameters('certSecretId')]"
+                }
+            }
+        }
+    }
+  ],
+  "outputs": {
+    "policyId": {
+      "type": "string",
+      "value": "[resourceId('Microsoft.Network/firewallPolicies', parameters('name'))]"
+    }
+  }
+}
