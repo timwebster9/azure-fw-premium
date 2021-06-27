@@ -42,17 +42,19 @@ resource "azurerm_application_gateway" "appgw" {
   }
 
   probe {
-    host = "127.0.0.1"
-    interval = 10
+    #host = "10.124.14.4"
+    pick_host_name_from_backend_http_settings = true
+    interval = 30
     name = var.appgw_http_probe_name
     protocol = "http"
     path = "/"
-    timeout = 5
+    timeout = 10
     unhealthy_threshold = 3
   }
 
   backend_http_settings {
     name                  = var.appgw_backend_http_settings_name
+    #pick_host_name_from_backend_address = true
     cookie_based_affinity = "Disabled"
     path                  = "/"
     port                  = 80

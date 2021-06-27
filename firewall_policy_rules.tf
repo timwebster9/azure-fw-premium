@@ -19,7 +19,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "example" {
         port = 443
       }
       source_addresses  = var.cidr_spoke_vnet
-      destination_fqdns = ["*.ubuntu.com"]
+      destination_fqdns = ["*.ubuntu.com", "*.snapcraft.io", "*.letsencrypt.org"]
     }
 
     rule {
@@ -33,23 +33,33 @@ resource "azurerm_firewall_policy_rule_collection_group" "example" {
         port = 443
       }
       source_addresses  = var.cidr_hub_subnet_appgw
-      destination_fqdns = ["127.0.0.1"]
+      destination_fqdns = ["10.124.14.4"]
     }
 
   }
 
-  # network_rule_collection {
-  #   name     = "hub_to_spoke"
-  #   priority = 400
-  #   action   = "Allow"
-  #   rule {
-  #     name                  = "allow-bastion-ssh"
-  #     protocols             = ["TCP"]
-  #     source_addresses      = var.cidr_hub_subnet_default
-  #     destination_addresses = var.cidr_spoke_vnet
-  #     destination_ports     = ["22"]
-  #   }
-  #}
+  network_rule_collection {
+    name     = "appgw_to_spoke"
+    priority = 400
+    action   = "Allow"
+
+    rule {
+      name                  = "allow-appgw-probe"
+      protocols             = ["TCP"]
+      source_addresses      = var.cidr_hub_subnet_appgw
+      destination_addresses = var.cidr_spoke_vnet
+      destination_ports     = ["22", "80", "443"]
+    }
+
+    rule {
+      name                  = "allow-appgw-default-probe"
+      protocols             = ["TCP"]
+      source_addresses      = var.cidr_hub_subnet_appgw
+      destination_addresses = ["127.0.0.1"]
+      destination_ports     = ["80", "443"]
+    }
+
+  }
 
   # nat_rule_collection {
   #   name     = "nat_rule_collection1"
