@@ -25,7 +25,7 @@ resource "azurerm_subnet" "hub_appgw" {
   name                 = "appgw"
   resource_group_name  = azurerm_resource_group.poc-vnet.name
   virtual_network_name = azurerm_virtual_network.hub.name
-  address_prefixes     = var.cidr_hub_subnet_appgw
+  address_prefixes     = [var.cidr_hub_subnet_appgw]
 }
 
 resource "azurerm_subnet" "hub_default" {

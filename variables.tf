@@ -39,7 +39,7 @@ variable "cidr_hub_subnet_default" {
 }
 
 variable "cidr_hub_subnet_appgw" {
-  type = list(string)
+  type = string
   description = "Hub app gateway subnet CIDR"
 }
 
@@ -109,5 +109,9 @@ variable "spoke_vm_admin_username" {
 }
 
 variable "spoke_vm_admin_password" {
+  type = string
+}
+
+variable "spoke_vm_fqdn" {
   type = string
 }

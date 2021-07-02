@@ -62,6 +62,16 @@ resource "azurerm_monitor_diagnostic_setting" "fw-diags" {
       enabled = false
     }
   }
+
+  metric {
+    category = "AllMetrics"
+    enabled = false
+
+    retention_policy {
+      days = 0
+      enabled = false
+    }
+  }
 }
 
 

@@ -4,6 +4,7 @@ resource "azurerm_public_ip" "appgw_pip" {
   location            = azurerm_resource_group.poc-vnet.location
   sku                 = "Standard"
   allocation_method   = "Static"
+  domain_name_label   = "fwpoctest"
 }
 
 resource "azurerm_application_gateway" "appgw" {
@@ -12,8 +13,8 @@ resource "azurerm_application_gateway" "appgw" {
   location            = azurerm_resource_group.poc-vnet.location
 
   sku {
-    name     = "Standard_v2"
-    tier     = "Standard_v2"
+    name     = "WAF_v2"
+    tier     = "WAF_v2"
   }
 
   autoscale_configuration {
@@ -42,25 +43,26 @@ resource "azurerm_application_gateway" "appgw" {
   }
 
   probe {
-    #host = "10.124.14.4"
-    pick_host_name_from_backend_http_settings = true
-    interval = 30
+    host = var.spoke_vm_fqdn
+    #pick_host_name_from_backend_http_settings = true
+    interval = 10
     name = var.appgw_http_probe_name
     protocol = "http"
     path = "/"
-    timeout = 10
+    timeout = 3
     unhealthy_threshold = 3
   }
 
   backend_http_settings {
     name                  = var.appgw_backend_http_settings_name
-    #pick_host_name_from_backend_address = true
+    pick_host_name_from_backend_address = false
+    host_name             = var.spoke_vm_fqdn
     cookie_based_affinity = "Disabled"
-    path                  = "/"
+    #path                  = "/"
     port                  = 80
     protocol              = "Http"
     request_timeout       = 60
-    #probe_name            = var.appgw_http_probe_name
+    probe_name            = var.appgw_http_probe_name
   }
 
   http_listener {
@@ -76,5 +78,52 @@ resource "azurerm_application_gateway" "appgw" {
     http_listener_name         = var.appgw_http_listener_name
     backend_address_pool_name  = var.appgw_backend_pool_name
     backend_http_settings_name = var.appgw_backend_http_settings_name
+  }
+
+  waf_configuration {
+    enabled           = true
+    firewall_mode     = "Prevention"
+    rule_set_type     = "OWASP"
+    rule_set_version  = "3.1"
+  }
+}
+
+resource "azurerm_monitor_diagnostic_setting" "appgw-diags" {
+  name               = "appgw-diags"
+  target_resource_id = azurerm_application_gateway.appgw.id
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
+
+  log {
+    category = "ApplicationGatewayAccessLog"
+    enabled  = true
+    retention_policy {
+      enabled = false
+    }
+  }
+
+  log {
+    category = "ApplicationGatewayPerformanceLog"
+    enabled  = true
+    retention_policy {
+      enabled = false
+    }
+  }
+
+  log {
+    category = "ApplicationGatewayFirewallLog"
+    enabled  = true
+    retention_policy {
+      enabled = false
+    }
+  }
+
+  metric {
+    category = "AllMetrics"
+    enabled = false
+
+    retention_policy {
+      days = 0
+      enabled = false
+    }
   }
 }

@@ -27,6 +27,13 @@ resource "azurerm_route_table" "spoke_subnet" {
     next_hop_type  = "VirtualAppliance"
     next_hop_in_ip_address = "10.124.4.4"
   }
+
+  route {
+    name           = "appgw-to-firewall"
+    address_prefix = var.cidr_hub_subnet_appgw
+    next_hop_type  = "VirtualAppliance"
+    next_hop_in_ip_address = "10.124.4.4"
+  }
 }
 
 resource "azurerm_subnet_route_table_association" "spoke-rt-association" {

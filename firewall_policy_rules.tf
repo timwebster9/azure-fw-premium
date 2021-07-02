@@ -32,34 +32,34 @@ resource "azurerm_firewall_policy_rule_collection_group" "example" {
         type = "Https"
         port = 443
       }
-      source_addresses  = var.cidr_hub_subnet_appgw
-      destination_fqdns = ["10.124.14.4"]
+      source_addresses  = [var.cidr_hub_subnet_appgw]
+      destination_fqdns = [azurerm_public_ip.appgw_pip.ip_address, var.spoke_vm_ip_address, var.spoke_vm_fqdn, "fwpoctest.uksouth.cloudapp.azure.com"]
     }
 
   }
 
-  network_rule_collection {
-    name     = "appgw_to_spoke"
-    priority = 400
-    action   = "Allow"
+  # network_rule_collection {
+  #   name     = "appgw_to_spoke"
+  #   priority = 400
+  #   action   = "Allow"
 
-    rule {
-      name                  = "allow-appgw-probe"
-      protocols             = ["TCP"]
-      source_addresses      = var.cidr_hub_subnet_appgw
-      destination_addresses = var.cidr_spoke_vnet
-      destination_ports     = ["22", "80", "443"]
-    }
+  #   rule {
+  #     name                  = "allow-appgw-probe"
+  #     protocols             = ["TCP"]
+  #     source_addresses      = var.cidr_hub_subnet_appgw
+  #     destination_addresses = var.cidr_spoke_vnet
+  #     destination_ports     = ["22", "80", "443"]
+  #   }
 
-    rule {
-      name                  = "allow-appgw-default-probe"
-      protocols             = ["TCP"]
-      source_addresses      = var.cidr_hub_subnet_appgw
-      destination_addresses = ["127.0.0.1"]
-      destination_ports     = ["80", "443"]
-    }
+  #   rule {
+  #     name                  = "allow-appgw-default-probe"
+  #     protocols             = ["TCP"]
+  #     source_addresses      = var.cidr_hub_subnet_appgw
+  #     destination_addresses = ["127.0.0.1"]
+  #     destination_ports     = ["80", "443"]
+  #   }
 
-  }
+  # }
 
   # nat_rule_collection {
   #   name     = "nat_rule_collection1"
