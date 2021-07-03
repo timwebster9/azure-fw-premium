@@ -20,6 +20,16 @@ resource "azurerm_key_vault_access_policy" "uami" {
   ]
 }
 
+resource "azurerm_key_vault_access_policy" "appgw-uami" {
+  key_vault_id = azurerm_key_vault.example.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = azurerm_user_assigned_identity.appgw-uami.principal_id
+
+  secret_permissions = [
+    "Get", "List"
+  ]
+}
+
 resource "azurerm_key_vault_access_policy" "me" {
   key_vault_id = azurerm_key_vault.example.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
@@ -38,4 +48,14 @@ resource "azurerm_key_vault_secret" "azfw-cert" {
   ]
 
   value = filebase64("interCA.pfx")
+}
+
+resource "azurerm_key_vault_secret" "appgw-cert" {
+  name         = "appgw-cert"
+  key_vault_id = azurerm_key_vault.example.id
+  depends_on = [
+    azurerm_key_vault_access_policy.me
+  ]
+
+  value = filebase64("fwpoctimw.pfx")
 }

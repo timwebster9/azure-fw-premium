@@ -5,6 +5,13 @@ resource "azurerm_user_assigned_identity" "fw-uami" {
   name = "firewall-uami"
 }
 
+resource "azurerm_user_assigned_identity" "appgw-uami" {
+  resource_group_name = azurerm_resource_group.poc-vnet.name
+  location            = azurerm_resource_group.poc-vnet.location
+
+  name = "appgw-uami"
+}
+
 # resource "azurerm_role_assignment" "secrets_user" {
 #   scope                = azurerm_key_vault.example.id
 #   role_definition_name = "Key Vault Secrets User"
