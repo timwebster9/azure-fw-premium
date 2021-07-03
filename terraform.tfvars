@@ -24,6 +24,7 @@ appgw_backend_http_settings_name = "http-settings"
 appgw_http_listener_name = "http-listener"
 appgw_routing_rule_name = "routing-rule"
 appgw_http_probe_name = "http-probe"
+appgw_keepheader_http_probe_name = "keepheader-http-probe"
 appgw_fwpoc_ssl_cert_name = "fwpoc-cert"
 
 # spoke

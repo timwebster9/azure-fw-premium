@@ -53,9 +53,20 @@ resource "azurerm_application_gateway" "appgw" {
     unhealthy_threshold = 3
   }
 
+    probe {
+    host = var.spoke_vm_fqdn
+    #pick_host_name_from_backend_http_settings = true
+    interval = 10
+    name = var.appgw_http_probe_name
+    protocol = "http"
+    path = "/"
+    timeout = 3
+    unhealthy_threshold = 3
+  }
+
   backend_http_settings {
     name                  = var.appgw_backend_http_settings_name
-    pick_host_name_from_backend_address = true
+    #pick_host_name_from_backend_address = true
     #host_name             = var.spoke_vm_fqdn
     cookie_based_affinity = "Disabled"
     #path                  = "/"

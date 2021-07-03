@@ -90,6 +90,10 @@ variable "appgw_http_probe_name" {
   type = string
 }
 
+variable "appgw_keepheader_http_probe_name" {
+  type = string
+}
+
 variable "appgw_fwpoc_ssl_cert_name" {
   type = string
 }
