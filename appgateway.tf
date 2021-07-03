@@ -65,11 +65,17 @@ resource "azurerm_application_gateway" "appgw" {
     probe_name            = var.appgw_http_probe_name
   }
 
+  ssl_certificate {
+    name = var.appgw_fwpoc_ssl_cert_name
+    key_vault_secret_id = azurerm_key_vault_secret.appgw-cert.id
+  }
+
   http_listener {
     name                           = var.appgw_http_listener_name
     frontend_ip_configuration_name = var.appgw_ip_config_name
     frontend_port_name             = var.appgw_frontend_port_name
-    protocol                       = "Http"
+    protocol                       = "Https"
+    ssl_certificate_name           = var.appgw_fwpoc_ssl_cert_name
   }
 
   request_routing_rule {

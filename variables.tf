@@ -90,6 +90,10 @@ variable "appgw_http_probe_name" {
   type = string
 }
 
+variable "appgw_fwpoc_ssl_cert_name" {
+  type = string
+}
+
 ## Spoke
 variable "cidr_spoke_vnet" {
   type = list(string)
