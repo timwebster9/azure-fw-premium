@@ -57,5 +57,5 @@ resource "azurerm_key_vault_secret" "appgw-cert" {
     azurerm_key_vault_access_policy.me
   ]
 
-  value = filebase64("fwpoctimw.pfx")
+  value = filebase64("certs/fwpoctimw.pfx")
 }
