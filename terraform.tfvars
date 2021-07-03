@@ -1,4 +1,4 @@
-hub_resource_group = "rg-fwprem-11"
+hub_resource_group = "rg-fwprem-12"
 location = "uksouth"
 
 # other stuff
