@@ -65,6 +65,10 @@ resource "azurerm_application_gateway" "appgw" {
     probe_name            = var.appgw_http_probe_name
   }
 
+  identity {
+    identity_ids = [azurerm_user_assigned_identity.appgw-uami.id]
+  }
+
   ssl_certificate {
     name = var.appgw_fwpoc_ssl_cert_name
     key_vault_secret_id = azurerm_key_vault_secret.appgw-cert.id
