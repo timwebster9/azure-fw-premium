@@ -31,12 +31,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Log in with HUB service principal and set to SPOKE subscription
-      - name: Login via Az module
-        uses: azure/login@v1
-        with:
-          creds: ${{secrets.TF_SP_CREDS}}
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
