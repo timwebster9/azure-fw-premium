@@ -42,7 +42,7 @@ resource "azurerm_key_vault_access_policy" "tf_user" {
 }
 
 # access policy for a human user (if using a SP to run TF)
-resource "azurerm_key_vault_access_policy" "tf_user" {
+resource "azurerm_key_vault_access_policy" "human_user" {
   key_vault_id = azurerm_key_vault.example.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
   object_id    = var.me_object_id
