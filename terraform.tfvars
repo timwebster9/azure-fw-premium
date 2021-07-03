@@ -1,6 +1,9 @@
 hub_resource_group = "rg-fwprem-10"
 location = "uksouth"
 
+# other stuff
+me_object_id = "f82bf2b5-4249-47b9-ab5c-5ed57bfcf267"
+
 # hub
 hub_firewall_policy = "hub-default-policy"
 cidr_hub_vnet = ["10.124.4.0/22"]

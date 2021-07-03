@@ -8,6 +8,11 @@ variable "hub_resource_group" {
   description = "Hub resource group name"
 }
 
+variable "me_object_id" {
+  type = string
+  description = "user object id"
+}
+
 variable "hub_firewall_policy" {
   type = string
   description = "Hub firewall policy name"
