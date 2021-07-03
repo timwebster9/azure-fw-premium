@@ -73,7 +73,7 @@ resource "azurerm_application_gateway" "appgw" {
     port                  = 80
     protocol              = "Http"
     request_timeout       = 60
-    probe_name            = var.appgw_http_probe_name
+    probe_name            = var.appgw_keepheader_http_probe_name
   }
 
   identity {
