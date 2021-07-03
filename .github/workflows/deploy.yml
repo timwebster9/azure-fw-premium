@@ -36,3 +36,12 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{secrets.TF_SP_CREDS}}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.1
+
+      - name: Terraform init
+        run: terraform init
+        
