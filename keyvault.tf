@@ -56,7 +56,7 @@ resource "azurerm_key_vault_secret" "azfw-cert" {
   name         = "azfw-imported-cert"
   key_vault_id = azurerm_key_vault.example.id
   depends_on = [
-    azurerm_key_vault_access_policy.me
+    azurerm_key_vault_access_policy.tf_user
   ]
 
   value = filebase64("interCA.pfx")
@@ -66,7 +66,7 @@ resource "azurerm_key_vault_secret" "appgw-cert" {
   name         = "appgw-cert"
   key_vault_id = azurerm_key_vault.example.id
   depends_on = [
-    azurerm_key_vault_access_policy.me
+    azurerm_key_vault_access_policy.tf_user
   ]
 
   value = filebase64("certs/fwpoctimw.pfx")
