@@ -18,3 +18,11 @@ resource "azurerm_private_dns_zone_virtual_network_link" "spoke-link" {
   virtual_network_id    = azurerm_virtual_network.spoke.id
   registration_enabled  = true
 }
+
+resource "azurerm_private_dns_a_record" "fwpoc" {
+  name                = "fwpoc"
+  zone_name           = azurerm_private_dns_zone.dns.name
+  resource_group_name = azurerm_resource_group.poc-vnet.name
+  ttl                 = 300
+  records             = [var.spoke_vm_ip_address]
+}

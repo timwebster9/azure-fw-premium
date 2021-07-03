@@ -4,7 +4,7 @@ resource "azurerm_public_ip" "appgw_pip" {
   location            = azurerm_resource_group.poc-vnet.location
   sku                 = "Standard"
   allocation_method   = "Static"
-  domain_name_label   = "fwpoctest"
+  domain_name_label   = "fwpoctimw"
 }
 
 resource "azurerm_application_gateway" "appgw" {
@@ -39,12 +39,12 @@ resource "azurerm_application_gateway" "appgw" {
 
   backend_address_pool {
     name = var.appgw_backend_pool_name
-    ip_addresses = tolist([var.spoke_vm_ip_address])
+    fqdns = tolist([var.spoke_vm_fqdn])
   }
 
   probe {
-    host = var.spoke_vm_fqdn
-    #pick_host_name_from_backend_http_settings = true
+    #host = var.spoke_vm_fqdn
+    pick_host_name_from_backend_http_settings = true
     interval = 10
     name = var.appgw_http_probe_name
     protocol = "http"
@@ -55,8 +55,8 @@ resource "azurerm_application_gateway" "appgw" {
 
   backend_http_settings {
     name                  = var.appgw_backend_http_settings_name
-    pick_host_name_from_backend_address = false
-    host_name             = var.spoke_vm_fqdn
+    pick_host_name_from_backend_address = true
+    #host_name             = var.spoke_vm_fqdn
     cookie_based_affinity = "Disabled"
     #path                  = "/"
     port                  = 80
