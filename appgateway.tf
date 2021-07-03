@@ -42,8 +42,8 @@ resource "azurerm_application_gateway" "appgw" {
     fqdns = tolist([var.spoke_vm_fqdn])
   }
 
+  # probe for use if original request hostname is OVERRIDDEN
   probe {
-    #host = var.spoke_vm_fqdn
     pick_host_name_from_backend_http_settings = true
     interval = 10
     name = var.appgw_http_probe_name
@@ -53,11 +53,11 @@ resource "azurerm_application_gateway" "appgw" {
     unhealthy_threshold = 3
   }
 
-    probe {
+  # probe for use if original request hostname is KEPT
+  probe {
     host = var.spoke_vm_fqdn
-    #pick_host_name_from_backend_http_settings = true
     interval = 10
-    name = var.appgw_http_probe_name
+    name = var.appgw_keepheader_http_probe_name
     protocol = "http"
     path = "/"
     timeout = 3
@@ -66,10 +66,7 @@ resource "azurerm_application_gateway" "appgw" {
 
   backend_http_settings {
     name                  = var.appgw_backend_http_settings_name
-    #pick_host_name_from_backend_address = true
-    #host_name             = var.spoke_vm_fqdn
     cookie_based_affinity = "Disabled"
-    #path                  = "/"
     port                  = 80
     protocol              = "Http"
     request_timeout       = 60
