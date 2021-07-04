@@ -64,6 +64,18 @@ resource "azurerm_application_gateway" "appgw" {
     unhealthy_threshold = 3
   }
 
+  # HTTPS probe for use if original request hostname is KEPT
+  probe {
+    host = azurerm_public_ip.appgw_pip.fqdn
+    interval = 10
+    name = var.appgw_keepheader_https_probe_name
+    protocol = "https"
+    path = "/"
+    timeout = 3
+    unhealthy_threshold = 3
+  }
+
+  # HTTP backend
   backend_http_settings {
     #pick_host_name_from_backend_address = true
     name                  = var.appgw_backend_http_settings_name
@@ -72,6 +84,17 @@ resource "azurerm_application_gateway" "appgw" {
     protocol              = "Http"
     request_timeout       = 60
     probe_name            = var.appgw_keepheader_http_probe_name
+  }
+
+    # HTTPS backend
+  backend_http_settings {
+    #pick_host_name_from_backend_address = true
+    name                  = var.appgw_backend_https_settings_name
+    cookie_based_affinity = "Disabled"
+    port                  = 443
+    protocol              = "Https"
+    request_timeout       = 60
+    probe_name            = var.appgw_keepheader_https_probe_name
   }
 
   identity {
@@ -97,7 +120,7 @@ resource "azurerm_application_gateway" "appgw" {
     rule_type                  = "Basic"
     http_listener_name         = var.appgw_http_listener_name
     backend_address_pool_name  = var.appgw_backend_pool_name
-    backend_http_settings_name = var.appgw_backend_http_settings_name
+    backend_http_settings_name = var.appgw_backend_https_settings_name
   }
 
   waf_configuration {

@@ -81,6 +81,9 @@ variable "appgw_backend_pool_name" {
 variable "appgw_backend_http_settings_name" {
   type = string
 }
+variable "appgw_backend_https_settings_name" {
+  type = string
+}
 
 variable "appgw_http_listener_name" {
   type = string
@@ -95,6 +98,10 @@ variable "appgw_http_probe_name" {
 }
 
 variable "appgw_keepheader_http_probe_name" {
+  type = string
+}
+
+variable "appgw_keepheader_https_probe_name" {
   type = string
 }
 
