@@ -28,6 +28,4 @@ server {
 
     server_name fwpoctimw.uksouth.cloudapp.azure.com;
     return 404; # managed by Certbot
-
-
 }
