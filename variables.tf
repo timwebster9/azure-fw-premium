@@ -43,6 +43,10 @@ variable "cidr_hub_subnet_default" {
   description = "Hub default subnet CIDR"
 }
 
+variable "private_dns_zone_name" {
+  type = string
+}
+
 variable "cidr_hub_subnet_appgw" {
   type = string
   description = "Hub app gateway subnet CIDR"
@@ -109,6 +113,10 @@ variable "cidr_spoke_subnet_default" {
   description = "Spoke default subnet CIDR"
 }
 
+variable "spoke_vm_name" {
+  type = string
+}
+
 variable "spoke_vm_ip_address" {
   type = string
 }
@@ -122,9 +130,5 @@ variable "spoke_vm_admin_username" {
 }
 
 variable "spoke_vm_admin_password" {
-  type = string
-}
-
-variable "spoke_vm_fqdn" {
   type = string
 }

@@ -39,7 +39,7 @@ resource "azurerm_application_gateway" "appgw" {
 
   backend_address_pool {
     name = var.appgw_backend_pool_name
-    fqdns = tolist([var.spoke_vm_fqdn])
+    fqdns = tolist([azurerm_public_ip.appgw_pip.fqdn])
   }
 
   # probe for use if original request hostname is OVERRIDDEN
@@ -55,7 +55,7 @@ resource "azurerm_application_gateway" "appgw" {
 
   # probe for use if original request hostname is KEPT
   probe {
-    host = var.spoke_vm_fqdn
+    host = azurerm_public_ip.appgw_pip.fqdn
     interval = 10
     name = var.appgw_keepheader_http_probe_name
     protocol = "http"

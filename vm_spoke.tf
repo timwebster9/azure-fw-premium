@@ -12,7 +12,7 @@ resource "azurerm_network_interface" "example" {
 }
 
 resource "azurerm_linux_virtual_machine" "example" {
-  name                = "spoke-vm"
+  name                = var.spoke_vm_name
   resource_group_name = azurerm_resource_group.poc-vnet.name
   location            = azurerm_resource_group.poc-vnet.location
   size                = var.spoke_vm_size

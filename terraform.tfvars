@@ -1,4 +1,4 @@
-hub_resource_group = "rg-fwprem-13"
+hub_resource_group = "rg-fwprem-14"
 location = "uksouth"
 
 # other stuff
@@ -12,6 +12,7 @@ cidr_hub_subnet_gw = ["10.124.4.64/27"]
 cidr_hub_subnet_bastion = ["10.124.4.96/27"]
 cidr_hub_subnet_default = ["10.124.6.0/24"]
 cidr_hub_subnet_appgw = "10.124.7.0/24"
+private_dns_zone_name = "uksouth.cloudapp.azure.com"
 
 # app gateway
 appgw_private_ip = "10.124.7.4"
@@ -30,8 +31,8 @@ appgw_fwpoc_ssl_cert_name = "fwpoc-cert"
 # spoke
 cidr_spoke_vnet = ["10.124.14.0/23"]
 cidr_spoke_subnet_default = ["10.124.14.0/28"]
+spoke_vm_name = "fwpoctimw"
 spoke_vm_size = "Standard_B1ms"
 spoke_vm_ip_address = "10.124.14.4"
 spoke_vm_admin_username = "adminuser"
 spoke_vm_admin_password = "Passw0rd1234"
-spoke_vm_fqdn = "fwpoc.deggymacets.com"
