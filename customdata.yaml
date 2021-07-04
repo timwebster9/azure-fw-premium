@@ -25,7 +25,7 @@ write_files:
 runcmd:
   - nginx -t
   - systemctl restart nginx
-  - snap install core; snap refresh core
-  - snap install --classic certbot
-  - ln -s /snap/bin/certbot /usr/bin/certbot
-  - certbot --nginx -m tim.webster@contino.io -d fwpoctimw.uksouth.cloudapp.azure.com --agree-tos
+  # - snap install core; snap refresh core
+  # - snap install --classic certbot
+  # - ln -s /snap/bin/certbot /usr/bin/certbot
+  # - certbot --nginx --non-interactive -m tim.webster@contino.io -d fwpoctimw.uksouth.cloudapp.azure.com --agree-tos
