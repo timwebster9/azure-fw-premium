@@ -89,6 +89,7 @@ resource "azurerm_application_gateway" "appgw" {
     frontend_port_name             = var.appgw_frontend_port_name
     protocol                       = "Https"
     ssl_certificate_name           = var.appgw_fwpoc_ssl_cert_name
+    host_name                      = azurerm_public_ip.appgw_pip.fqdn
   }
 
   request_routing_rule {
