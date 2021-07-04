@@ -86,7 +86,7 @@ resource "azurerm_application_gateway" "appgw" {
     probe_name            = var.appgw_keepheader_http_probe_name
   }
 
-    # HTTPS backend
+  # HTTPS backend
   backend_http_settings {
     #pick_host_name_from_backend_address = true
     name                  = var.appgw_backend_https_settings_name
@@ -120,7 +120,7 @@ resource "azurerm_application_gateway" "appgw" {
     rule_type                  = "Basic"
     http_listener_name         = var.appgw_http_listener_name
     backend_address_pool_name  = var.appgw_backend_pool_name
-    backend_http_settings_name = var.appgw_backend_https_settings_name
+    backend_http_settings_name = var.appgw_backend_http_settings_name
   }
 
   waf_configuration {
