@@ -65,13 +65,13 @@ resource "azurerm_application_gateway" "appgw" {
   }
 
   backend_http_settings {
-    pick_host_name_from_backend_address = true
+    #pick_host_name_from_backend_address = true
     name                  = var.appgw_backend_http_settings_name
     cookie_based_affinity = "Disabled"
     port                  = 80
     protocol              = "Http"
     request_timeout       = 60
-    probe_name            = var.appgw_http_probe_name
+    probe_name            = var.appgw_keepheader_http_probe_name
   }
 
   identity {
