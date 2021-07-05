@@ -62,6 +62,8 @@ resource "azurerm_key_vault_secret" "azfw-cert" {
   value = filebase64("interCA.pfx")
 }
 
+# convert letsencrypt cert to .pfx using:
+# openssl pkcs12 -export -out certificate.pfx -inkey privkey.pem -in cert.pem -certfile chain.pem
 resource "azurerm_key_vault_secret" "appgw-cert" {
   name         = "appgw-cert"
   key_vault_id = azurerm_key_vault.example.id

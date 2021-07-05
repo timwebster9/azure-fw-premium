@@ -29,3 +29,39 @@ runcmd:
   # - snap install --classic certbot
   # - ln -s /snap/bin/certbot /usr/bin/certbot
   # - certbot --nginx --non-interactive -m tim.webster@contino.io -d fwpoctimw.uksouth.cloudapp.azure.com --agree-tos
+
+ca-certs:
+  trusted:
+  - |
+    -----BEGIN CERTIFICATE-----
+    MIIFgjCCA2qgAwIBAgIJAMxzkkbfCV2qMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNV
+    BAYTAlVTMQswCQYDVQQIDAJVUzEUMBIGA1UECgwLU2VsZiBTaWduZWQxHDAaBgNV
+    BAMME1NlbGYgU2lnbmVkIFJvb3QgQ0EwHhcNMjEwNjI1MTEzNTA5WhcNMjQwNDE0
+    MTEzNTA5WjBOMQswCQYDVQQGEwJVUzELMAkGA1UECAwCVVMxFDASBgNVBAoMC1Nl
+    bGYgU2lnbmVkMRwwGgYDVQQDDBNTZWxmIFNpZ25lZCBSb290IENBMIICIjANBgkq
+    hkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAoT2zEumDQJLDy4P6HkktZRpvM6wFwkZA
+    h9j5FZCicDYr5glQ1dLNamU45NKLLzYwzxDu7xUXGZ2Zl+TzrvGP3kAed08wLt+y
+    avetPIRwtNXF3VnArCcY83/khsBCJ1q75Zhyj+BkcM7me8wO4Sm6Pi3NVUiXZ6fS
+    KK77+Ra1FoH2Ctydr+Bxpn92pRTRPL3rsDv2OKsqvNqfi8NsmtPbk9JMjKFdMaNV
+    abx7AIWTOzheC4to3HupUr0aJJ2WS/2bhIVRIEP1lTGpgNeKfNNhXsKQaj4kEZbo
+    B3keRMI2i6ppxZIxea28lCqlXcNmUtfvZNZkQ2lznsDf18LlrMHWWyGEGrfHWG/j
+    bAJweFETrmFwpbBDC/TFIiV71IJgUsxTJC1SMLtYQEGmDbNJocbZycMUEBdNTRUQ
+    iHL/kNAZmrLLPqiau35VIFs/KAnS03RokLuYchHJBHbiJdzPz+oY5wORXojL+iam
+    NtnY0WuUmQBoQo8e9awlHGhG3SkP91HtPpT9UQKsu2iWs+D4zcjmZ7qWcglB2M4L
+    6VZVHs/BxRjU0zyEDKmiMa9tlDLMubaS1feYzygLgocusf8GPIxFakN0m5gbTTrE
+    yjlF4QHN7loOeQLQdXLZxrS+3l7n+qir8aulLm7AyL/sjXuVx0ZA8CEBEuncJokL
+    DbQyr/iFRvsCAwEAAaNjMGEwHQYDVR0OBBYEFDdLG3oVfaUMw7uIk42Sw8z4BDKC
+    MB8GA1UdIwQYMBaAFDdLG3oVfaUMw7uIk42Sw8z4BDKCMA8GA1UdEwEB/wQFMAMB
+    Af8wDgYDVR0PAQH/BAQDAgGGMA0GCSqGSIb3DQEBCwUAA4ICAQBtY5myQu9tLCx2
+    Sk7yr/0zCG/H69hvpSg7c1fvyUsITJb6SNqCxW+leunMJj4B/G7zAw5aKMMl3Ak6
+    7+3PHNHwO/Bze14CEUQNGIEP1D6UOUrY837xZkypw89O4aIeNlOzKduPC4LRCVCE
+    +p8p84kGByiDPo6bKbzaQMCnDjse0V66sS8aA8GHy9zI3h2KTXgSqewMxoBlxJ8J
+    0eKF9XIyv3sFqsizPE2SIg1TRYs2/AApEcM3S7PnLYYti+2VtcszfLGyK74bmrs5
+    2tAECe7RzWG2n9/XTZEgIpSes0S8XO0Bu9jS/ay6YAffygs2FROYdJC/8/cm9eYk
+    y/Utz744wfbLOoKHS++v+AJmbbEMvu6yZVJ/iM+JLJ8SUtHt5naRq6v/iVDbFq7I
+    5x5iLoXjX/Bn2d52EWiqZ85i2KVm7f3kmUtBB1q5dBAhC06lssrsIIQxYcYSTh4h
+    Ab6YZSvDAHFTavpPVUmwsdQFqYQiz4L01lqGgTHG0HSX90zqvna/Ovvp8LLwqhRq
+    KI4sfNPbjx/JpL/46Wuqj6gLhth0nvnN18fAiKbHtZtzKyOmBFR8puFc+u9AaSWn
+    nX/Hpp/g8hzNh7fRxH9i27ZQBM/23n0gaaiO/oaifrxjtabaGGJGoImMJx5eDeZb
+    8Lvi8mtUKND/kDUzrWR2n0P0uaJMGA==
+    -----END CERTIFICATE-----
