@@ -74,11 +74,5 @@
                 ]
             }
         }
-    ],
-    "outputs": {
-      "policyId": {
-        "type": "string",
-        "value": "[resourceId('Microsoft.Network/firewallPolicies', parameters('name'))]"
-      }
-    }
+    ]
   }
