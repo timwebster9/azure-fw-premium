@@ -42,6 +42,7 @@ resource "azurerm_application_gateway" "appgw_spoke" {
     name                          = var.appgw_spoke_private_ip_config_name
     private_ip_address            = var.appgw_spoke_private_ip
     private_ip_address_allocation = "Static"
+    subnet_id                     = azurerm_subnet.spoke-appgw.id
   }
 
   backend_address_pool {
