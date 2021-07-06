@@ -52,7 +52,7 @@ variable "cidr_hub_subnet_appgw" {
   description = "Hub app gateway subnet CIDR"
 }
 
-## App Gateway
+## App Gateway (HUB)
 variable "appgw_private_ip" {
   type = string
   description = "Hub app gateway private IP"
@@ -142,5 +142,62 @@ variable "spoke_vm_admin_username" {
 }
 
 variable "spoke_vm_admin_password" {
+  type = string
+}
+
+## App Gateway (SPOKE)
+variable "appgw_spoke_private_ip" {
+  type = string
+  description = "Spoke app gateway private IP"
+}
+
+variable "appgw_spoke_pip_name" {
+  type = string
+}
+
+variable "appgw_spoke_name" {
+  type = string
+}
+
+variable "appgw_spoke_ip_config_name" {
+  type = string
+}
+
+variable "appgw_spoke_frontend_port_name" {
+  type = string
+}
+
+variable "appgw_spoke_backend_pool_name" {
+  type = string
+}
+
+variable "appgw_spoke_backend_http_settings_name" {
+  type = string
+}
+variable "appgw_spoke_backend_https_settings_name" {
+  type = string
+}
+
+variable "appgw_spoke_http_listener_name" {
+  type = string
+}
+
+variable "appgw_spoke_routing_rule_name" {
+  type = string
+}
+
+variable "appgw_spoke_http_probe_name" {
+  type = string
+}
+
+variable "appgw_spoke_keepheader_http_probe_name" {
+  type = string
+}
+
+variable "appgw_spoke_keepheader_https_probe_name" {
+  type = string
+}
+
+variable "appgw_spoke_fwpoc_ssl_cert_name" {
   type = string
 }
