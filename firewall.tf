@@ -12,6 +12,17 @@ module "firewall_policy" {
   ]
 }
 
+module "firewall_rule_collection_group" {
+  source = "./modules/firewall-rule-collection-group"
+  resource_group = azurerm_resource_group.poc-vnet.name
+  policy_name = var.hub_firewall_policy
+  rule_group_name = "test-rule-collection-group"
+
+  depends_on = [
+    firewall_policy
+  ]
+}
+
 resource "azurerm_public_ip" "pip-fw-poc" {
   name                = "pip-poc-fw"
   location            = azurerm_resource_group.poc-vnet.location

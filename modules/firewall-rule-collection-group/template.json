@@ -1,0 +1,84 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "variables": {},
+    "parameters": {
+        "policyName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the policy"
+            }
+        },
+        "ruleGroupName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the rule collection group"
+            }
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/firewallPolicies/ruleCollectionGroups",
+            "apiVersion": "2020-07-01",
+            "name": "[concat(parameters('policyName'), '/', parameters('ruleGroupName'))]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "priority": 200,
+                "ruleCollections": [
+                    {
+                        "name": "AllowWeb",
+                        "priority": 101,
+                        "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+                        "action": {
+                            "type": "Allow"
+                        },
+                        "rules": [
+                            {
+                                "ruleType": "ApplicationRule",
+                                "name": "AllowAzure",
+                                "protocols": [
+                                    {
+                                        "protocolType": "Https",
+                                        "port": 443
+                                    }
+                                ],
+                                "targetFqdns": [
+                                    "*azure.com",
+                                    "*microsoft.com"
+                                ],
+                                "sourceAddresses": [
+                                    "*"
+                                ],
+                                "terminateTLS": true
+                            },
+                            {
+                                "ruleType": "ApplicationRule",
+                                "name": "AllowNews",
+                                "protocols": [
+                                    {
+                                        "protocolType": "Https",
+                                        "port": 443
+                                    }
+                                ],
+                                "webCategories": [
+                                    "business",
+                                    "webbasedemail"
+                                ],
+                                "sourceAddresses": [
+                                    "*"
+                                ],
+                                "terminateTLS": true
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "outputs": {
+      "policyId": {
+        "type": "string",
+        "value": "[resourceId('Microsoft.Network/firewallPolicies', parameters('name'))]"
+      }
+    }
+  }
