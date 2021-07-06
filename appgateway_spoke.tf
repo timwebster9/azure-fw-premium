@@ -4,7 +4,7 @@ resource "azurerm_public_ip" "appgw_spoke_pip" {
   location            = azurerm_resource_group.poc-vnet.location
   sku                 = "Standard"
   allocation_method   = "Static"
-  domain_name_label   = "fwpoctimw"
+  domain_name_label   = "fwpocspokepip"
 }
 
 resource "azurerm_application_gateway" "appgw_spoke" {
