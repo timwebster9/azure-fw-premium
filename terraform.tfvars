@@ -1,5 +1,6 @@
 hub_resource_group = "rg-fwprem-15"
 location = "uksouth"
+app_domain_name_label = "fwpoctimw"
 
 # other stuff
 me_object_id = "f82bf2b5-4249-47b9-ab5c-5ed57bfcf267"

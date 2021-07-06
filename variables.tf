@@ -8,6 +8,11 @@ variable "hub_resource_group" {
   description = "Hub resource group name"
 }
 
+variable "app_domain_name_label" {
+  type = string
+  description = "DNS name for PIP"
+}
+
 variable "me_object_id" {
   type = string
   description = "user object id"

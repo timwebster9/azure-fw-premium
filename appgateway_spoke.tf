@@ -1,11 +1,11 @@
-resource "azurerm_public_ip" "appgw_spoke_pip" {
-  name                = var.appgw_spoke_pip_name
-  resource_group_name = azurerm_resource_group.poc-vnet.name
-  location            = azurerm_resource_group.poc-vnet.location
-  sku                 = "Standard"
-  allocation_method   = "Static"
-  domain_name_label   = "fwpoctimw"
-}
+# resource "azurerm_public_ip" "appgw_spoke_pip" {
+#   name                = var.appgw_spoke_pip_name
+#   resource_group_name = azurerm_resource_group.poc-vnet.name
+#   location            = azurerm_resource_group.poc-vnet.location
+#   sku                 = "Standard"
+#   allocation_method   = "Static"
+#   domain_name_label   = "fwpoctimw"
+# }
 
 resource "azurerm_application_gateway" "appgw_spoke" {
   name                = var.appgw_spoke_name
@@ -40,7 +40,7 @@ resource "azurerm_application_gateway" "appgw_spoke" {
 
   backend_address_pool {
     name = var.appgw_spoke_backend_pool_name
-    fqdns = tolist([azurerm_public_ip.appgw_spoke_pip.fqdn])
+    fqdns = tolist([azurerm_public_ip.pip-fw-poc.fqdn])
   }
 
   # probe for use if original request hostname is OVERRIDDEN
@@ -56,7 +56,7 @@ resource "azurerm_application_gateway" "appgw_spoke" {
 
   # probe for use if original request hostname is KEPT
   probe {
-    host = azurerm_public_ip.appgw_spoke_pip.fqdn
+    host = azurerm_public_ip.pip-fw-poc.fqdn
     interval = 10
     name = var.appgw_spoke_keepheader_http_probe_name
     protocol = "http"
@@ -67,7 +67,7 @@ resource "azurerm_application_gateway" "appgw_spoke" {
 
   # HTTPS probe for use if original request hostname is KEPT
   probe {
-    host = azurerm_public_ip.appgw_spoke_pip.fqdn
+    host = azurerm_public_ip.pip-fw-poc.fqdn
     interval = 10
     name = var.appgw_spoke_keepheader_https_probe_name
     protocol = "https"
@@ -113,7 +113,7 @@ resource "azurerm_application_gateway" "appgw_spoke" {
     frontend_port_name             = var.appgw_spoke_frontend_port_name
     protocol                       = "Https"
     ssl_certificate_name           = var.appgw_spoke_fwpoc_ssl_cert_name
-    host_name                      = azurerm_public_ip.appgw_spoke_pip.fqdn
+    host_name                      = azurerm_public_ip.pip-fw-poc.fqdn
   }
 
   request_routing_rule {
