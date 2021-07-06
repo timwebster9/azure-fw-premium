@@ -33,6 +33,7 @@ appgw_fwpoc_ssl_cert_name = "fwpoc-cert"
 # spoke
 cidr_spoke_vnet = ["10.124.14.0/23"]
 cidr_spoke_subnet_default = ["10.124.14.0/28"]
+cidr_spoke_subnet_appgw = "10.124.15.0/24"
 spoke_vm_name = "fwpoctimw"
 spoke_vm_size = "Standard_B1ms"
 spoke_vm_ip_address = "10.124.14.4"

@@ -120,6 +120,11 @@ variable "cidr_spoke_subnet_default" {
   description = "Spoke default subnet CIDR"
 }
 
+variable "cidr_spoke_subnet_appgw" {
+  type = string
+  description = "Spoke App Gateway subnet CIDR"
+}
+
 variable "spoke_vm_name" {
   type = string
 }

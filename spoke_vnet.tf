@@ -14,6 +14,13 @@ resource "azurerm_subnet" "spoke" {
   address_prefixes     = var.cidr_spoke_subnet_default
 }
 
+resource "azurerm_subnet" "spoke-appgw" {
+  name                 = "appgw-sn"
+  resource_group_name  = azurerm_resource_group.poc-vnet.name
+  virtual_network_name = azurerm_virtual_network.spoke.name
+  address_prefixes     = [var.cidr_spoke_subnet_appgw]
+}
+
 # ROUTES
 resource "azurerm_route_table" "spoke_subnet" {
   name                          = "spoke-rt"
