@@ -3,8 +3,8 @@ resource "azurerm_resource_group_template_deployment" "firewall_policy" {
   resource_group_name = var.resource_group
   deployment_mode     = "Incremental"
   parameters_content = jsonencode({
-    "policyName" = {
-      value = var.policy_name
+    "name" = {
+      value = var.name
     },
     "identityId" = {
       value = var.identity_id
