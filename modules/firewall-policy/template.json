@@ -49,6 +49,9 @@
                   "name": "[parameters('keyVaultName')]",
                  "keyVaultSecretId": "[parameters('certSecretId')]"
                 }
+            },
+            "intrusionDetection": {
+                "mode": "Deny"
             }
         }
     }

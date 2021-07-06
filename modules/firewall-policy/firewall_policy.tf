@@ -18,9 +18,9 @@ resource "azurerm_resource_group_template_deployment" "firewall_policy" {
   })
   template_content = file("${path.module}/template.json")
 
-  lifecycle {
-    ignore_changes = [
-      template_content,
-    ]
-  }
+  # lifecycle {
+  #   ignore_changes = [
+  #     template_content,
+  #   ]
+  # }
 }
