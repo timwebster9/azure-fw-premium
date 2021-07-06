@@ -1,11 +1,11 @@
-# resource "azurerm_public_ip" "appgw_spoke_pip" {
-#   name                = var.appgw_spoke_pip_name
-#   resource_group_name = azurerm_resource_group.poc-vnet.name
-#   location            = azurerm_resource_group.poc-vnet.location
-#   sku                 = "Standard"
-#   allocation_method   = "Static"
-#   domain_name_label   = "fwpoctimw"
-# }
+resource "azurerm_public_ip" "appgw_spoke_pip" {
+  name                = var.appgw_spoke_pip_name
+  resource_group_name = azurerm_resource_group.poc-vnet.name
+  location            = azurerm_resource_group.poc-vnet.location
+  sku                 = "Standard"
+  allocation_method   = "Static"
+  domain_name_label   = "fwpoctimw"
+}
 
 resource "azurerm_application_gateway" "appgw_spoke" {
   name                = var.appgw_spoke_name
@@ -36,6 +36,7 @@ resource "azurerm_application_gateway" "appgw_spoke" {
     name                          = var.appgw_spoke_ip_config_name
     private_ip_address            = var.appgw_spoke_private_ip
     private_ip_address_allocation = "Static"
+    public_ip_address_id          = azurerm_public_ip.appgw_spoke_pip.id
   }
 
   backend_address_pool {
