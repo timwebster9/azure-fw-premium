@@ -19,7 +19,7 @@ module "firewall_rule_collection_group" {
   rule_group_name = "test-rule-collection-group"
 
   depends_on = [
-    firewall_policy
+    module.firewall_policy
   ]
 }
 
