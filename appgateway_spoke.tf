@@ -32,11 +32,16 @@ resource "azurerm_application_gateway" "appgw_spoke" {
     port = 443
   }
 
+  # Public IP
   frontend_ip_configuration {
     name                          = var.appgw_spoke_ip_config_name
+    public_ip_address_id          = azurerm_public_ip.appgw_spoke_pip.id
+  }
+
+  frontend_ip_configuration {
+    name                          = var.appgw_spoke_private_ip_config_name
     private_ip_address            = var.appgw_spoke_private_ip
     private_ip_address_allocation = "Static"
-    public_ip_address_id          = azurerm_public_ip.appgw_spoke_pip.id
   }
 
   backend_address_pool {

@@ -168,6 +168,10 @@ variable "appgw_spoke_ip_config_name" {
   type = string
 }
 
+variable "appgw_spoke_private_ip_config_name" {
+  type = string
+}
+
 variable "appgw_spoke_frontend_port_name" {
   type = string
 }
