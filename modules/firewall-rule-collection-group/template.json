@@ -44,7 +44,8 @@
                                 ],
                                 "targetFqdns": [
                                     "*azure.com",
-                                    "*microsoft.com"
+                                    "*microsoft.com",
+                                    "*.google.com"
                                 ],
                                 "sourceAddresses": [
                                     "*"
