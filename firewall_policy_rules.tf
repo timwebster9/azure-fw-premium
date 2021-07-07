@@ -3,6 +3,21 @@ resource "azurerm_firewall_policy_rule_collection_group" "example" {
   firewall_policy_id = module.firewall_policy.policy_id
   priority           = 500
 
+  nat_rule_collection {
+    name     = "nat_rule_collection"
+    priority = 300
+    action   = "Dnat"
+    rule {
+      name                = "nat_rule_collection1_rule1"
+      protocols           = ["TCP"]
+      source_addresses    = ["*"]
+      destination_address = azurerm_public_ip.pip-fw-poc.ip_address
+      destination_ports   = "443"
+      translated_address  = var.appgw_spoke_private_ip
+      translated_port     = "443"
+    }
+  }
+
   application_rule_collection {
     name     = "infra-rules"
     priority = 500
