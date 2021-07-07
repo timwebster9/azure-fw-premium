@@ -121,7 +121,7 @@ variable "cidr_spoke_vnet" {
 }
 
 variable "cidr_spoke_subnet_default" {
-  type = list(string)
+  type = string
   description = "Spoke default subnet CIDR"
 }
 

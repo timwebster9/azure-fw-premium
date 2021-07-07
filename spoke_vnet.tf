@@ -11,7 +11,7 @@ resource "azurerm_subnet" "spoke" {
   name                 = "spoke-sn"
   resource_group_name  = azurerm_resource_group.poc-vnet.name
   virtual_network_name = azurerm_virtual_network.spoke.name
-  address_prefixes     = var.cidr_spoke_subnet_default
+  address_prefixes     = [var.cidr_spoke_subnet_default]
 }
 
 resource "azurerm_subnet" "spoke-appgw" {
