@@ -12,7 +12,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "example" {
       protocols           = ["TCP"]
       source_addresses    = ["*"]
       destination_address = azurerm_public_ip.pip-fw-poc.ip_address
-      destination_ports   = "443"
+      destination_ports   = ["443"]
       translated_address  = var.appgw_spoke_private_ip
       translated_port     = "443"
     }
