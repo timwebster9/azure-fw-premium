@@ -1,4 +1,4 @@
-name: firewall-stop
+name: firewall-start
 
 on:
   # enable manual trigger
