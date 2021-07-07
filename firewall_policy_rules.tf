@@ -47,7 +47,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "example" {
         type = "Https"
         port = 443
       }
-      source_addresses  = [var.cidr_hub_subnet_appgw]
+      source_addresses  = [var.cidr_hub_subnet_appgw, var.cidr_spoke_subnet_appgw]
       destination_fqdns = [azurerm_public_ip.pip-fw-poc.ip_address, var.spoke_vm_ip_address, azurerm_public_ip.pip-fw-poc.fqdn]
     }
 
