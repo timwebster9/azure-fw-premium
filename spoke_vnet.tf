@@ -59,6 +59,6 @@ resource "azurerm_subnet_route_table_association" "spoke-rt-association" {
 }
 
 resource "azurerm_subnet_route_table_association" "spokeappgw-rt-association" {
-  subnet_id      = azurerm_subnet.spoke.id
+  subnet_id      = azurerm_subnet.spoke-appgw.id
   route_table_id = azurerm_route_table.spoke_appgw_subnet.id
 }
