@@ -38,6 +38,7 @@ resource "azurerm_application_gateway" "appgw_spoke" {
     public_ip_address_id          = azurerm_public_ip.appgw_spoke_pip.id
   }
 
+  # Private IP
   frontend_ip_configuration {
     name                          = var.appgw_spoke_private_ip_config_name
     private_ip_address            = var.appgw_spoke_private_ip
@@ -114,9 +115,20 @@ resource "azurerm_application_gateway" "appgw_spoke" {
     key_vault_secret_id = azurerm_key_vault_secret.appgw-cert.id
   }
 
+  # Public IP listener
+  # http_listener {
+  #   name                           = var.appgw_spoke_http_listener_name
+  #   frontend_ip_configuration_name = var.appgw_spoke_ip_config_name
+  #   frontend_port_name             = var.appgw_spoke_frontend_port_name
+  #   protocol                       = "Https"
+  #   ssl_certificate_name           = var.appgw_spoke_fwpoc_ssl_cert_name
+  #   host_name                      = azurerm_public_ip.pip-fw-poc.fqdn
+  # }
+
+    # Private IP listener
   http_listener {
-    name                           = var.appgw_spoke_http_listener_name
-    frontend_ip_configuration_name = var.appgw_spoke_ip_config_name
+    name                           = var.appgw_spoke_private_http_listener_name
+    frontend_ip_configuration_name = var.appgw_spoke_private_ip_config_name
     frontend_port_name             = var.appgw_spoke_frontend_port_name
     protocol                       = "Https"
     ssl_certificate_name           = var.appgw_spoke_fwpoc_ssl_cert_name

@@ -1,4 +1,4 @@
-hub_resource_group = "rg-fwprem-16"
+hub_resource_group = "rg-fwprem-17"
 location = "uksouth"
 app_domain_name_label = "fwpoctimw"
 
@@ -52,6 +52,7 @@ appgw_spoke_backend_pool_name = "backend-pool"
 appgw_spoke_backend_http_settings_name = "http-settings"
 appgw_spoke_backend_https_settings_name = "https-settings"
 appgw_spoke_http_listener_name = "http-listener"
+appgw_spoke_private_http_listener_name = "http-private-listener"
 appgw_spoke_routing_rule_name = "routing-rule"
 appgw_spoke_http_probe_name = "http-probe"
 appgw_spoke_keepheader_http_probe_name = "keepheader-http-probe"

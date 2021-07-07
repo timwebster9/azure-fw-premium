@@ -191,6 +191,10 @@ variable "appgw_spoke_http_listener_name" {
   type = string
 }
 
+variable "appgw_spoke_private_http_listener_name" {
+  type = string
+}
+
 variable "appgw_spoke_routing_rule_name" {
   type = string
 }
