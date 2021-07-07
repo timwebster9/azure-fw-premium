@@ -138,7 +138,7 @@ resource "azurerm_application_gateway" "appgw_spoke" {
   request_routing_rule {
     name                       = var.appgw_spoke_routing_rule_name
     rule_type                  = "Basic"
-    http_listener_name         = var.appgw_spoke_http_listener_name
+    http_listener_name         = var.appgw_spoke_private_http_listener_name
     backend_address_pool_name  = var.appgw_spoke_backend_pool_name
     backend_http_settings_name = var.appgw_spoke_backend_http_settings_name
   }
