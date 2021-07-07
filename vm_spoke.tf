@@ -45,3 +45,16 @@ resource "azurerm_linux_virtual_machine" "example" {
   custom_data = filebase64("customdata.yaml")
 
 }
+
+resource "azurerm_dev_test_global_vm_shutdown_schedule" "example" {
+  virtual_machine_id = azurerm_virtual_machine.example.id
+  location           = azurerm_resource_group.poc-vnet.location
+  enabled            = true
+
+  daily_recurrence_time = "1700"
+  timezone              = "UTC"
+
+  notification_settings {
+    enabled         = false
+  }
+}
