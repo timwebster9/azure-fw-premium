@@ -40,7 +40,7 @@ resource "azurerm_route_table" "spoke_subnet" {
 
 # route traffic from spoke app gateway to backends back to firewall for IDPS
 resource "azurerm_route_table" "spoke_appgw_subnet" {
-  name                          = "spoke-rt"
+  name                          = "spoke-appgw-rt"
   location                      = azurerm_resource_group.poc-vnet.location
   resource_group_name           = azurerm_resource_group.poc-vnet.name
   disable_bgp_route_propagation = false
