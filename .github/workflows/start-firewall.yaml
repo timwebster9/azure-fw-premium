@@ -1,0 +1,30 @@
+name: firewall-stop
+
+on:
+  # enable manual trigger
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Login via Az module
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.TF_SP_CREDS}}
+        enable-AzPSSession: true 
+
+    - name: Run Azure PowerShell script
+      uses: azure/powershell@v1
+      with:
+        inlineScript: |
+          $hubResourceGroup = "rg-fwprem-17"
+          $fwName = "fw-poc"
+          $vnetName = "vnet-poc-hub"
+          $fwPipName = "pip-poc-fw"
+          $azfw = Get-AzFirewall -Name $fwName -ResourceGroupName $hubResourceGroup
+          $vnet = Get-AzVirtualNetwork -ResourceGroupName $hubResourceGroup -Name $vnetName
+          $publicip1 = Get-AzPublicIpAddress -Name $fwPipName -ResourceGroupName $hubResourceGroup
+          $azfw.Allocate($vnet,@($publicip1))
+          Set-AzFirewall -AzureFirewall $azfw
+        azPSVersion: 'latest'
