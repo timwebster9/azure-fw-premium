@@ -3,6 +3,11 @@ name: firewall-stop
 on:
   # enable manual trigger
   workflow_dispatch:
+    inputs:
+      resourceGroup:
+        description: 'Resource group name'
+        default: ''
+        required: true
 
 jobs:
   build:
@@ -18,7 +23,7 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          $azfw = Get-AzFirewall -Name "fw-poc" -ResourceGroupName "rg-fwprem-17"
+          $azfw = Get-AzFirewall -Name "fw-poc" -ResourceGroupName ${{ github.event.inputs.resourceGroup }}
           $azfw.Deallocate()
           Set-AzFirewall -AzureFirewall $azfw
         azPSVersion: 'latest'
