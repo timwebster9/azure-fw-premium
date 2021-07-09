@@ -6,7 +6,7 @@ on:
     paths-ignore:
       - '**.md'
       - .github/CODEOWNERS
-      - .github/workflows/manual/*
+      - .github/workflows/manual-*
   pull_request:
     branches: [ main ]
     paths-ignore:
