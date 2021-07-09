@@ -1,4 +1,4 @@
-hub_resource_group = "rg-fwprem-17"
+hub_resource_group = "rg-fwprem-18"
 location = "uksouth"
 app_domain_name_label = "fwpoctimw"
 
