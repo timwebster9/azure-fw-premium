@@ -3,6 +3,11 @@ name: firewall-start
 on:
   # enable manual trigger
   workflow_dispatch:
+    inputs:
+      resourceGroup:
+        description: 'Resource group name'
+        default: ''
+        required: true
 
 jobs:
   build:
@@ -18,7 +23,7 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          $hubResourceGroup = "rg-fwprem-17"
+          $hubResourceGroup = ${{ github.event.inputs.resourceGroup }}
           $fwName = "fw-poc"
           $vnetName = "vnet-poc-hub"
           $fwPipName = "pip-poc-fw"
