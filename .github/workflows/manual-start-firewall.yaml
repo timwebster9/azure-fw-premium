@@ -23,7 +23,7 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          $hubResourceGroup = ${{ github.event.inputs.resourceGroup }}
+          $hubResourceGroup = "${{ github.event.inputs.resourceGroup }}"
           $fwName = "fw-poc"
           $vnetName = "vnet-poc-hub"
           $fwPipName = "pip-poc-fw"
