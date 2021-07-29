@@ -131,6 +131,7 @@ resource "azurerm_application_gateway" "appgw" {
   }
 }
 
+# Would normally be implemented with Azure Policy
 resource "azurerm_monitor_diagnostic_setting" "appgw-diags" {
   name               = "appgw-diags"
   target_resource_id = azurerm_application_gateway.appgw.id
